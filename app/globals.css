@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.treasure-animation {
+  position: absolute;
+  color: #34d399;
+  font-size: 24px;
+  font-weight: bold;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+
+.progress-circle {
+  width: 3rem;
+  height: 3rem;
+  position: relative;
+}
+
+.progress-circle svg {
+  transform: rotate(-90deg);
+}
+
+.progress-circle circle {
+  transition: stroke-dashoffset 0.35s;
+  transform: translate(0, 0);
+  transform-origin: 50% 50%;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glass-effect2 {
+  background: rgba(255, 255, 255, 0.1); 
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3); 
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.inner-bar {
+  margin: 4px;
+  height: calc(100% - 8px);
+}
+
+@font-face {
+  font-family: 'Bungee';
+  src: url('../fonts/Bungee-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+.bungee-regular {
+  font-family: 'Bungee', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Anton';
+  src: url('../fonts/Anton-Regular.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+.anton-regular {
+  font-family: 'Anton', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.card {
+  @apply border-2 border-[#353e4a] rounded-lg bg-midBlue flex flex-col items-center justify-center w-28 h-28 shadow-lg transition-transform transform hover:scale-105;
+}
+
+.empty-card {
+  @apply border-2 border-dashed border-[#353e4a] rounded-lg bg-midBlue flex flex-col items-center justify-center w-28 h-28 shadow-lg opacity-75;
+}
+
+.icon {
+  @apply w-12 h-12 text-lightGold;
+}

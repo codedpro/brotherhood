@@ -1,0 +1,58 @@
+.mapContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  color: black;
+}
+
+.canvas {
+  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.controls {
+  margin: 10px;
+}
+
+.button {
+  margin: 5px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 400px;
+}
+
+.actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+@media (max-width: 600px) {
+  .modalContent {
+    width: 95%;
+  }
+}
