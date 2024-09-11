@@ -27,7 +27,7 @@ export default function Home() {
     setChestHealth(amount);
   };
   const { webApp, user } = useTelegram();
-  console.log(webApp.initData);
+  console.log(webApp?.initData);
   return (
     <Layout>
       <div className="text-center text-4xl mb-6 font-serif mt-20">
