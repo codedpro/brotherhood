@@ -3,7 +3,6 @@ import { ReactNode } from "react";
 import { Suspense, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import "./globals.css";
-import Head from "next/head";
 import Script from "next/script";
 
 const TelegramProvider = dynamic(() =>
@@ -33,7 +32,7 @@ export default function RootLayout({
         if (window.Telegram?.WebApp) {
           setIsTelegram(true);
         } else {
-          setTimeout(checkTelegram, 3000);
+          setTimeout(checkTelegram, 300);
         }
       };
       checkTelegram();
@@ -42,9 +41,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-
-        <Script src="https://telegram.org/js/telegram-web-app.js"></Script>
- 
+   
       <body>
         {isTelegram ? (
           <Suspense fallback={<div>Loading Telegram...</div>}>
