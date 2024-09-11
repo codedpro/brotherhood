@@ -1,9 +1,8 @@
 "use client";
-import { ReactNode } from "react";
-import { Suspense, useEffect, useState } from "react";
+import { ReactNode, Suspense, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import "./globals.css";
-import Script from "next/script";
+import { useRouter } from "next/navigation";
 
 const TelegramProvider = dynamic(() =>
   import("react-telegram-miniapp").then(
@@ -24,13 +23,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [isReady, setIsReady] = useState(false);
   const [isTelegram, setIsTelegram] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const checkTelegram = () => {
         if (window.Telegram?.WebApp) {
           setIsTelegram(true);
+
+          // Initialize the WebApp
+          const app = window.Telegram.WebApp;
+          app.ready();
+
+          // WebApp and user are now available
+          if (app.initDataUnsafe.user) {
+            setIsReady(true);
+          } else {
+            setError("User info is not available.");
+          }
         } else {
           setTimeout(checkTelegram, 300);
         }
@@ -39,17 +52,28 @@ export default function RootLayout({
     }
   }, []);
 
+  // Redirect or block navigation if the WebApp is not ready or there's an error
+  useEffect(() => {
+    if (!isReady && !error) {
+      // Optionally block navigation or show a loader until ready
+      router.push("/loading"); // Push a loading route if needed
+    }
+  }, [isReady, error, router]);
+
   return (
     <html lang="en">
       <body>
         <TelegramProvider>
-          {" "}
-          {isTelegram ? (
+          {isTelegram && isReady ? (
             <Suspense fallback={<div>Loading Telegram...</div>}>
-              {children}{" "}
+              {children} {/* Render children when ready */}
             </Suspense>
           ) : (
-            <div>This app is not running inside Telegram.</div>
+            <div>
+              {error
+                ? `Error: ${error}`
+                : "This app is not running inside Telegram."}
+            </div>
           )}
         </TelegramProvider>
       </body>
