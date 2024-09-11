@@ -32,7 +32,7 @@ export default function Home() {
     <Layout>
       <div className="text-center text-4xl mb-6 font-serif mt-20">
         <h1 className="flex items-center justify-center text-lightGold text-xl">
-          {user.id}
+          {user?.id} d
         </h1>
         <h1 className="flex items-center justify-center">
           <FaCoins className="mr-2 text-lightGold " />
