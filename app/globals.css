@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .treasure-animation {
   position: absolute;
   color: #34d399;

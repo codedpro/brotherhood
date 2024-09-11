@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { FaMapMarkedAlt } from "react-icons/fa";
+import Image from "next/image";
 
 interface CollectionItem {
   id: number;
@@ -16,7 +17,12 @@ interface CollectionProps {
   icon?: JSX.Element;
 }
 
-const Collection: React.FC<CollectionProps> = ({ items, title, totalSlots, icon }) => {
+const Collection: React.FC<CollectionProps> = ({
+  items,
+  title,
+  totalSlots,
+  icon,
+}) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -43,7 +49,9 @@ const Collection: React.FC<CollectionProps> = ({ items, title, totalSlots, icon 
 
   return (
     <div className="mb-8">
-      <h2 className="text-2xl font-serif text-lightGold mb-4 text-center">{title}</h2>
+      <h2 className="text-2xl font-serif text-lightGold mb-4 text-center">
+        {title}
+      </h2>
       <div className="flex justify-center">
         <div className="grid grid-cols-3 gap-4" ref={containerRef}>
           {items.map((item) => (
@@ -54,14 +62,18 @@ const Collection: React.FC<CollectionProps> = ({ items, title, totalSlots, icon 
               onMouseLeave={handleMouseLeave}
             >
               {item.imageUrl ? (
-                <img
+                <Image
+                  width={3000}
+                  height={3000}
                   src={item.imageUrl}
                   alt={`Item ${item.id}`}
                   className="w-full h-full object-cover rounded-md"
                 />
               ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center text-lightGold" >
-                  {icon || <FaMapMarkedAlt className="w-16 h-16 text-lightGold" />}
+                <div className="w-full h-full flex flex-col items-center justify-center text-lightGold">
+                  {icon || (
+                    <FaMapMarkedAlt className="w-16 h-16 text-lightGold" />
+                  )}
                   <p className="text-white mt-2 text-xs">
                     {item.latitude},{item.longitude}
                   </p>

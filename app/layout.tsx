@@ -1,11 +1,13 @@
-"use client";
+"use client"
+import { ReactNode } from "react";
 import { Suspense, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import "./globals.css";
 
 const TelegramProvider = dynamic(() =>
-  import("react-telegram-miniapp").then((mod) => mod.TelegramProvider)
+  import("react-telegram-miniapp").then((mod) => mod.TelegramProvider as React.FC<{ children: ReactNode }>)
 );
+
 declare global {
   interface Window {
     Telegram: {
@@ -13,6 +15,7 @@ declare global {
     };
   }
 }
+
 export default function RootLayout({
   children,
 }: Readonly<{

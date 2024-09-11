@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
-import { ArcherContainer, ArcherElement } from 'react-archer';
-import gsap from 'gsap';
+import { useState, useEffect, useRef } from "react";
+import { ArcherContainer, ArcherElement } from "react-archer";
+import gsap from "gsap";
 
-type AnchorPosition = 'top' | 'bottom' | 'left' | 'right';
+type AnchorPosition = "top" | "bottom" | "left" | "right";
 
 type NodeData = {
   id: number;
@@ -60,16 +60,16 @@ const TreeComponent = () => {
       timeline.fromTo(
         layer,
         { opacity: 0, y: -50 },
-        { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.1 },
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out", stagger: 0.1 },
         i * 1.2
       );
     });
 
     // Animate arrows after nodes
     timeline.fromTo(
-      '.archer-arrow',
+      ".archer-arrow",
       { opacity: 0 },
-      { opacity: 1, duration: 1, ease: 'power3.out', stagger: 0.1 },
+      { opacity: 1, duration: 1, ease: "power3.out", stagger: 0.1 },
       (nodesByLayer.length - 1) * 1.2 + 1 // start after the last node layer animation
     );
   }, [data]);
@@ -115,15 +115,15 @@ const TreeComponent = () => {
     const relations = [
       {
         targetId: leftId,
-        targetAnchor: 'top' as AnchorPosition,
-        sourceAnchor: 'bottom' as AnchorPosition,
-        style: { strokeColor: '#fdd835', strokeWidth: 1 },
+        targetAnchor: "top" as AnchorPosition,
+        sourceAnchor: "bottom" as AnchorPosition,
+        style: { strokeColor: "#fdd835", strokeWidth: 1 },
       },
       {
         targetId: rightId,
-        targetAnchor: 'top' as AnchorPosition,
-        sourceAnchor: 'bottom' as AnchorPosition,
-        style: { strokeColor: '#fdd835', strokeWidth: 1 },
+        targetAnchor: "top" as AnchorPosition,
+        sourceAnchor: "bottom" as AnchorPosition,
+        style: { strokeColor: "#fdd835", strokeWidth: 1 },
       },
     ];
 
@@ -140,11 +140,21 @@ const TreeComponent = () => {
     return (
       <div className="relative flex justify-center space-x-4">
         {nodes.map((node, index) => {
+          const key = `layer-${layerIndex}-${index}`;
           if (node) {
-            return renderTree(node, `${layerIndex}-${index}`);
+            return (
+              <ArcherElement id={`node-${node.id}`} key={key}>
+                <div className="flex flex-col items-center node">
+                  {renderNode(node.id, node.subset)}
+                </div>
+              </ArcherElement>
+            );
           } else {
             return (
-              <ArcherElement id={`placeholder-${layerIndex}-${index}`}>
+              <ArcherElement
+                id={`placeholder-${layerIndex}-${index}`}
+                key={key}
+              >
                 <div className="flex flex-col items-center node">
                   {renderPlaceholderNode(`placeholder-${layerIndex}-${index}`)}
                 </div>
@@ -159,7 +169,7 @@ const TreeComponent = () => {
   return (
     <ArcherContainer strokeColor="#fdd835">
       <div className="relative flex flex-col items-center mt-10 space-y-12">
-        {renderTree(data, 'root')}
+        {renderTree(data, "root")}
         {renderLayer([data.leftMember || null, data.rightMember || null], 1)}
         {renderLayer(
           [

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import "tailwindcss/tailwind.css";
 
 interface Cell {
@@ -42,6 +42,11 @@ const Map: React.FC<MapProps> = ({ coins, cells, onCellClick, onBuy }) => {
   const dragging = useRef(false);
   const dragStart = useRef({ x: 0, y: 0 });
 
+  const getRegionColor = useCallback((lat: number, long: number) => {
+    const regionIndex = getRegionIndex(lat, long);
+    return REGION_COLORS[regionIndex];
+  }, []);
+
   useEffect(() => {
     if (canvasRef.current) {
       const canvas = canvasRef.current;
@@ -50,7 +55,6 @@ const Map: React.FC<MapProps> = ({ coins, cells, onCellClick, onBuy }) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         const cellSize = CELL_BASE_SIZE * zoomLevel;
 
-        // Draw cells with region overlay
         cells.forEach((cell) => {
           const x = cell.longitude * cellSize + offsetX;
           const y = cell.latitude * cellSize + offsetY;
@@ -64,7 +68,7 @@ const Map: React.FC<MapProps> = ({ coins, cells, onCellClick, onBuy }) => {
         });
       }
     }
-  }, [cells, zoomLevel, offsetX, offsetY]);
+  }, [cells, zoomLevel, offsetX, offsetY, getRegionColor]);
 
   const handleCellClick = (cell: Cell) => {
     onCellClick(cell);
@@ -80,16 +84,11 @@ const Map: React.FC<MapProps> = ({ coins, cells, onCellClick, onBuy }) => {
     }
   };
 
-  const getRegionColor = (lat: number, long: number) => {
-    const regionIndex = getRegionIndex(lat, long);
-    return REGION_COLORS[regionIndex];
-  };
-
   const getRegionIndex = (lat: number, long: number) => {
-    const regionSize = 34; // Define a region size
+    const regionSize = 34;
     const row = Math.floor(lat / regionSize);
     const col = Math.floor(long / regionSize);
-    const index = (row * 3 + col) % REGION_COLORS.length; // Updated to 3 columns for 9 regions
+    const index = (row * 3 + col) % REGION_COLORS.length;
     return index;
   };
 
