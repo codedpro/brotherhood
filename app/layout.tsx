@@ -34,11 +34,9 @@ export default function RootLayout({
         if (window.Telegram?.WebApp) {
           setIsTelegram(true);
 
-          // Initialize the WebApp
           const app = window.Telegram.WebApp;
           app.ready();
 
-          // WebApp and user are now available
           if (app.initDataUnsafe.user) {
             setIsReady(true);
           } else {
@@ -51,8 +49,6 @@ export default function RootLayout({
       checkTelegram();
     }
   }, []);
-
-
 
   return (
     <html lang="en">

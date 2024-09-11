@@ -2,7 +2,7 @@
 
 import Layout from "@/components/Layout";
 import Treasure from "@/components/Treasure";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaBolt, FaCoins } from "react-icons/fa";
 import { useTelegram } from "react-telegram-miniapp";
 
@@ -26,8 +26,36 @@ export default function Home() {
   const updateChestHealth = (amount: number) => {
     setChestHealth(amount);
   };
+
   const { webApp, user } = useTelegram();
-  console.log(webApp?.initData);
+  const initData = webApp?.initData;
+
+  useEffect(() => {
+    if (initData) {
+      // POST request with header InitData
+      const postData = async () => {
+        try {
+          const response = await fetch(
+            "https://7dff-2-147-9-6.ngrok-free.app/api/base/testapi",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                InitData: initData, // Add InitData header
+              },
+            }
+          );
+          const result = await response.json();
+          console.log("Response:", result);
+        } catch (error) {
+          console.error("Error posting data:", error);
+        }
+      };
+
+      postData();
+    }
+  }, [initData, score, energy, chestHealth, user?.id]);
+
   return (
     <Layout>
       <div className="text-center text-4xl mb-6 font-serif mt-20">
