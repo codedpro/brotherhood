@@ -52,13 +52,7 @@ export default function RootLayout({
     }
   }, []);
 
-  // Redirect or block navigation if the WebApp is not ready or there's an error
-  useEffect(() => {
-    if (!isReady && !error) {
-      // Optionally block navigation or show a loader until ready
-      router.push("/loading"); // Push a loading route if needed
-    }
-  }, [isReady, error, router]);
+
 
   return (
     <html lang="en">
