@@ -5,6 +5,7 @@ import Treasure from "@/components/Treasure";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { FaBolt, FaCoins } from "react-icons/fa";
+import { useTelegram } from "react-telegram-miniapp";
 
 const formatScore = (score: number) => {
   return score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -26,10 +27,13 @@ export default function Home() {
   const updateChestHealth = (amount: number) => {
     setChestHealth(amount);
   };
-
+  const { webApp, user } = useTelegram();
   return (
     <Layout>
       <div className="text-center text-4xl mb-6 font-serif mt-20">
+        <h1 className="flex items-center justify-center text-lightGold text-xl">
+          {user.id}
+        </h1>
         <h1 className="flex items-center justify-center">
           <FaCoins className="mr-2 text-lightGold " />
           {formatScore(score)}
