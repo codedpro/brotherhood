@@ -24,11 +24,18 @@ export default function RootLayout({
   const [isTelegram, setIsTelegram] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && window.Telegram?.WebApp) {
-      setIsTelegram(true);
+    if (typeof window !== "undefined") {
+      const checkTelegram = () => {
+        if (window.Telegram?.WebApp) {
+          setIsTelegram(true);
+        } else {
+          setTimeout(checkTelegram, 100); // Retry after a short delay
+        }
+      };
+      checkTelegram(); // Initial check
     }
   }, []);
-
+  
   return (
     <html lang="en">
       <body>
