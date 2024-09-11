@@ -2,7 +2,6 @@
 
 import Layout from "@/components/Layout";
 import Treasure from "@/components/Treasure";
-import dynamic from "next/dynamic";
 import { useState } from "react";
 import { FaBolt, FaCoins } from "react-icons/fa";
 import { useTelegram } from "react-telegram-miniapp";
@@ -28,6 +27,7 @@ export default function Home() {
     setChestHealth(amount);
   };
   const { webApp, user } = useTelegram();
+  console.log(webApp.initData);
   return (
     <Layout>
       <div className="text-center text-4xl mb-6 font-serif mt-20">
