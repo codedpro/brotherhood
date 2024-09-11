@@ -42,9 +42,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <Head>
+
         <Script src="https://telegram.org/js/telegram-web-app.js"></Script>
-      </Head>
+ 
       <body>
         {isTelegram ? (
           <Suspense fallback={<div>Loading Telegram...</div>}>
