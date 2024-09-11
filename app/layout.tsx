@@ -1,11 +1,13 @@
-"use client"
+"use client";
 import { ReactNode } from "react";
 import { Suspense, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import "./globals.css";
 
 const TelegramProvider = dynamic(() =>
-  import("react-telegram-miniapp").then((mod) => mod.TelegramProvider as React.FC<{ children: ReactNode }>)
+  import("react-telegram-miniapp").then(
+    (mod) => mod.TelegramProvider as React.FC<{ children: ReactNode }>
+  )
 );
 
 declare global {
@@ -29,13 +31,13 @@ export default function RootLayout({
         if (window.Telegram?.WebApp) {
           setIsTelegram(true);
         } else {
-          setTimeout(checkTelegram, 100); // Retry after a short delay
+          setTimeout(checkTelegram, 3000);
         }
       };
-      checkTelegram(); // Initial check
+      checkTelegram();
     }
   }, []);
-  
+
   return (
     <html lang="en">
       <body>
