@@ -41,7 +41,7 @@ export default function Home() {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                InitData: initData, // Add InitData header
+                initData: initData, // Add InitData header
               },
             }
           );
