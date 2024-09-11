@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import "./globals.css";
 import Head from "next/head";
+import Script from "next/script";
 
 const TelegramProvider = dynamic(() =>
   import("react-telegram-miniapp").then(
@@ -42,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <script src="https://telegram.org/js/telegram-web-app.js"></script>
+        <Script src="https://telegram.org/js/telegram-web-app.js"></Script>
       </Head>
       <body>
         {isTelegram ? (
