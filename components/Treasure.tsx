@@ -15,13 +15,7 @@ interface TreasureProps {
   claimReward: () => void;
 }
 
-const Treasure: React.FC<TreasureProps> = ({
-  isMining,
-  itemName,
-  claimReward,
-  startTime,
-  endTime,
-}) => {
+const Treasure: React.FC<TreasureProps> = ({ isMining, itemName }) => {
   const [lottieFile, setLottieFile] = useState<any>(null);
   const lottieRef = useRef<any>(null);
 
@@ -37,7 +31,7 @@ const Treasure: React.FC<TreasureProps> = ({
 
   const lottieOptions = {
     loop: true,
-    autoplay: false, // Disable autoplay initially
+    autoplay: false,
     animationData: lottieFile,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
@@ -45,21 +39,28 @@ const Treasure: React.FC<TreasureProps> = ({
   };
 
   return (
-    <div className="relative min-h-screen w-full">
+    <div className="relative min-h-screen w-full flex items-center justify-center">
       <div
-        className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        className="flex justify-center items-center"
         style={{
-          pointerEvents: "none", // Disable all click events
-          userSelect: "none", // Prevent text/image selection
+          pointerEvents: "none",
+          userSelect: "none",
+          width: "100%",
+          height: "100%",
+          overflow: "visible", // Ensure no content is hidden
         }}
       >
         {lottieFile && (
           <Lottie
             options={lottieOptions}
-            height="auto"
-            width="60vw" // Make it responsive based on viewport width
-            isPaused={!isMining} // Play animation when mining starts
+            height="50vh" // Large size relative to viewport height
+            width="1000vw"  // Large size relative to viewport width
+            isPaused={!isMining}
             ref={lottieRef}
+            style={{
+              maxWidth: "100%",
+              maxHeight: "100%",
+            }}
           />
         )}
       </div>

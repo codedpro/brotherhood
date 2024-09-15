@@ -88,7 +88,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className="relative min-h-screen w-full flex flex-col items-center justify-between">
+      <div className="relative min-h-screen w-full flex flex-col items-center justify-between overflow-auto">
         {/* Score Display */}
         <div className="absolute top-8 text-center text-4xl font-serif">
           <h1 className="flex items-center justify-center">
