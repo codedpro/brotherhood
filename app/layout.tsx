@@ -5,10 +5,11 @@ import "./globals.css";
 import { useRouter } from "next/navigation";
 
 const TelegramProvider = dynamic(() =>
-  import("react-telegram-miniapp").then(
-    (mod) => mod.TelegramProvider as React.FC<{ children: ReactNode }>
-  )
-);
+    import("react-telegram-miniapp").then(
+      (mod) => mod.TelegramProvider as React.FC<{ children: ReactNode }>
+    ), { ssr: false }
+  );
+  
 
 declare global {
   interface Window {
@@ -33,11 +34,11 @@ export default function RootLayout({
       const checkTelegram = () => {
         if (window.Telegram?.WebApp) {
           setIsTelegram(true);
-
+  
           const app = window.Telegram.WebApp;
           app.ready();
-
-          if (app.initDataUnsafe.user) {
+  
+          if (app.initDataUnsafe?.user) {
             setIsReady(true);
           } else {
             setError("User info is not available.");
@@ -49,7 +50,7 @@ export default function RootLayout({
       checkTelegram();
     }
   }, []);
-
+  
   return (
     <html lang="en">
       <body>

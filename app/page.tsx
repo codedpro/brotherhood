@@ -36,7 +36,6 @@ export default function Home() {
     setIsClaimable(false); // Reset the claimable state
   };
 
-  // Effect to handle countdown and progress bar
   useEffect(() => {
     if (endTime) {
       const interval = setInterval(() => {
@@ -76,7 +75,7 @@ export default function Home() {
             }
           );
           const result = await response.json();
-          console.log(result)
+          console.log(result);
         } catch (error) {
           console.error("Error posting data:", error);
         }
@@ -89,7 +88,6 @@ export default function Home() {
   return (
     <Layout>
       <div className="relative min-h-screen w-full flex flex-col items-center justify-between overflow-auto">
-        {/* Score Display */}
         <div className="absolute top-8 text-center text-4xl font-serif">
           <h1 className="flex items-center justify-center">
             <FaCoins className="mr-2 text-lightGold" />
@@ -97,7 +95,6 @@ export default function Home() {
           </h1>
         </div>
 
-        {/* Treasure Animation */}
         <div className="flex-grow w-full flex justify-center items-center">
           <Treasure
             startTime={startTime || 0}
@@ -129,7 +126,6 @@ export default function Home() {
           </div>
         )}
 
-        {/* Start Mining and Claim Button */}
         <div className="w-full absolute bottom-20 flex justify-center">
           <div className="w-[19rem] relative p-3">
             <div className="flex justify-center gap-4 ">
