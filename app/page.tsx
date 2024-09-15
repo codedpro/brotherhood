@@ -3,7 +3,7 @@
 import Layout from "@/components/Layout";
 import Treasure from "@/components/Treasure";
 import { useState, useEffect } from "react";
-import { FaBolt, FaCoins } from "react-icons/fa";
+import { FaCoins } from "react-icons/fa";
 import { useTelegram } from "react-telegram-miniapp";
 
 const formatScore = (score: number) => {
@@ -12,41 +12,71 @@ const formatScore = (score: number) => {
 
 export default function Home() {
   const [score, setScore] = useState(20030010);
-  const [energy, setEnergy] = useState(1000);
-  const [chestHealth, setChestHealth] = useState(2000);
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const [endTime, setEndTime] = useState<number | null>(null);
+  const [isClaimable, setIsClaimable] = useState(false);
+  const [timeLeft, setTimeLeft] = useState<number>(0);
+  const [progress, setProgress] = useState<number>(0);
 
-  const updateScore = (points: number) => {
-    setScore((prev) => prev + points);
+  const startMining = () => {
+    const now = Date.now();
+    const miningDuration = 60000;
+    setStartTime(now);
+    setEndTime(now + miningDuration);
+    setIsClaimable(false);
   };
 
-  const updateEnergy = (amount: number) => {
-    setEnergy(amount);
+  const claimReward = () => {
+    console.log("Treasure claimed!");
+    setScore((prev) => prev + 500);
+    setStartTime(null);
+    setEndTime(null);
+    setTimeLeft(0);
+    setProgress(0);
+    setIsClaimable(false); // Reset the claimable state
   };
 
-  const updateChestHealth = (amount: number) => {
-    setChestHealth(amount);
-  };
+  // Effect to handle countdown and progress bar
+  useEffect(() => {
+    if (endTime) {
+      const interval = setInterval(() => {
+        const currentTime = Date.now();
+        const remainingTime = endTime - currentTime;
+        setTimeLeft(remainingTime);
+
+        const totalDuration = endTime - startTime!;
+        setProgress(((totalDuration - remainingTime) / totalDuration) * 100);
+
+        if (remainingTime <= 0) {
+          clearInterval(interval);
+          setTimeLeft(0);
+          setIsClaimable(true);
+        }
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [startTime, endTime]);
 
   const { webApp, user } = useTelegram();
   const initData = webApp?.initData;
 
   useEffect(() => {
     if (initData) {
-      // POST request with header InitData
       const postData = async () => {
         try {
           const response = await fetch(
-            "https://7dff-2-147-9-6.ngrok-free.app/api/base/testapi",
+            process.env.NEXT_PUBLIC_URL + "/NewUser",
             {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                initData: initData, // Add InitData header
+                initData: initData,
               },
             }
           );
           const result = await response.json();
-          console.log("Response:", result);
+          console.log(result)
         } catch (error) {
           console.error("Error posting data:", error);
         }
@@ -54,62 +84,71 @@ export default function Home() {
 
       postData();
     }
-  }, [initData, score, energy, chestHealth, user?.id]);
+  }, [initData, user?.id]);
 
   return (
     <Layout>
-      <div className="text-center text-4xl mb-6 font-serif mt-20">
-        <h1 className="flex items-center justify-center text-lightGold text-xl">
-          {user?.id} d
-        </h1>
-        <h1 className="flex items-center justify-center">
-          <FaCoins className="mr-2 text-lightGold " />
-          {formatScore(score)}
-        </h1>
-      </div>
-      <Treasure
-        energy={energy}
-        energyPerSecond={100}
-        scorePerTap={20}
-        maxConcurrentTaps={10}
-        updateScore={updateScore}
-        updateEnergy={updateEnergy}
-        chestHealth={chestHealth}
-        updateChestHealth={updateChestHealth}
-      />
-      <div className="">
-        <div className="w-[19rem] mr-11 mb-20  relative p-3">
-          <div
-            className="absolute w-full flex justify-center  items-center text-white text-sm"
-            style={{ top: "-1rem" }}
-          >
-            {chestHealth}/2000
-          </div>
-          <div className="relative mb-4">
-            <div className="w-full h-8 bg-gray-200 rounded-full overflow-hidden glass-effect">
+      <div className="relative min-h-screen w-full flex flex-col items-center justify-between">
+        {/* Score Display */}
+        <div className="absolute top-8 text-center text-4xl font-serif">
+          <h1 className="flex items-center justify-center">
+            <FaCoins className="mr-2 text-lightGold" />
+            {formatScore(score)}
+          </h1>
+        </div>
+
+        {/* Treasure Animation */}
+        <div className="flex-grow w-full flex justify-center items-center">
+          <Treasure
+            startTime={startTime || 0}
+            endTime={endTime || 0}
+            isMining={!!endTime && !isClaimable}
+            itemName="mining_level1"
+            claimReward={claimReward}
+          />
+        </div>
+
+        {endTime && !isClaimable && (
+          <div className="absolute bottom-16 w-full flex justify-center">
+            <div className="w-[19rem] relative p-3">
               <div
-                className="bg-gradient-to-r from-healthStart to-healthEnd h-full rounded-full absolute top-0 left-0 inner-bar"
-                style={{ width: `${(chestHealth / 2000) * 98.2}%` }}
-              ></div>
-            </div>
-            <div className="absolute right-[-3.5rem] top-1/2 transform -translate-y-1/2">
-              <div className="relative flex items-center justify-center mr-1 w-13 h-13 rounded-full glass-effect">
-                <svg className="w-12 h-12 ">
-                  <circle
-                    className="text-energyStart"
-                    strokeWidth="2"
-                    strokeDasharray="113"
-                    strokeDashoffset={113 - (energy / 1000) * 113}
-                    strokeLinecap="round"
-                    stroke="currentColor"
-                    fill="transparent"
-                    r="18"
-                    cx="24"
-                    cy="24"
-                  />
-                </svg>
-                <FaBolt className="absolute text-lightGold text-xl" />
+                className="absolute w-full flex justify-center items-center text-white text-sm"
+                style={{ top: "-1rem" }}
+              >
+                Time Remaining: {Math.max(timeLeft / 1000, 0).toFixed(0)}s
               </div>
+              <div className="relative mb-4">
+                <div className="w-full h-8 bg-gray-200 rounded-full overflow-hidden glass-effect">
+                  <div
+                    className="bg-gradient-to-r from-green-400 to-blue-500 h-full rounded-full absolute top-0 left-0 inner-bar"
+                    style={{ width: `${98 - progress}%` }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Start Mining and Claim Button */}
+        <div className="w-full absolute bottom-20 flex justify-center">
+          <div className="w-[19rem] relative p-3">
+            <div className="flex justify-center gap-4 ">
+              {!isClaimable && !endTime && (
+                <button
+                  className="bg-green-500 text-white py-2 px-6 rounded-lg"
+                  onClick={startMining}
+                >
+                  Start Mining
+                </button>
+              )}
+              {isClaimable && (
+                <button
+                  className="bg-blue-500 text-white py-2 px-6 rounded-lg"
+                  onClick={claimReward}
+                >
+                  Claim
+                </button>
+              )}
             </div>
           </div>
         </div>
