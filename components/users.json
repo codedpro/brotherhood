@@ -1,0 +1,228 @@
+{
+  "firstname": "AlexanderTheGreat",
+  "rightMember": {
+    "firstname": "MaximilianTheSecond",
+    "rightMember": {
+      "firstname": "Catherine",
+      "rightMember": {
+        "firstname": "IvanTheTerrible",
+        "rightMember": {
+          "firstname": "PeterTheGreat",
+          "leftMember": {
+            "firstname": "NapoleonBonaparte",
+            "rightMember": {
+              "firstname": "JoanOfArc",
+              "rightMember": {
+                "firstname": "LouisXIV",
+                "rightMember": {
+                  "firstname": "CharlesDeGaulle",
+                  "rightMember": {
+                    "firstname": "MaximilianTheSecond",
+                    "rightMember": {
+                      "firstname": "Catherine",
+                      "rightMember": {
+                        "firstname": "IvanTheTerrible",
+                        "rightMember": {
+                          "firstname": "PeterTheGreat",
+                          "leftMember": {
+                            "firstname": "NapoleonBonaparte",
+                            "rightMember": {
+                              "firstname": "JoanOfArc",
+                              "rightMember": {
+                                "firstname": "LouisXIV",
+                                "rightMember": {
+                                  "firstname": "CharlesDeGaulle"
+                                },
+                                "leftMember": {
+                                  "firstname": "MarieAntoinette"
+                                }
+                              },
+                              "leftMember": {
+                                "firstname": "Charlemagne",
+                                "rightMember": {
+                                  "firstname": "OttoVonBismarck"
+                                },
+                                "leftMember": {
+                                  "firstname": "FrederickTheGreat"
+                                }
+                              }
+                            },
+                            "leftMember": {
+                              "firstname": "Cleopatra",
+                              "rightMember": {
+                                "firstname": "JuliusCaesar",
+                                "rightMember": {
+                                  "firstname": "MarcusAurelius"
+                                },
+                                "leftMember": {
+                                  "firstname": "AugustusCaesar"
+                                }
+                              },
+                              "leftMember": {
+                                "firstname": "RamsesTheGreat",
+                                "rightMember": {
+                                  "firstname": "Tutankhamun"
+                                },
+                                "leftMember": {
+                                  "firstname": "Akhenaten"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "leftMember": {
+                          "firstname": "NicholasTheSecond"
+                        }
+                      },
+                      "leftMember": {
+                        "firstname": "HenryTheEighth",
+                        "rightMember": {
+                          "firstname": "EdwardTheConfessor"
+                        },
+                        "leftMember": {
+                          "firstname": "RichardTheLionheart"
+                        }
+                      }
+                    },
+                    "leftMember": {
+                      "firstname": "ElizabethTheFirst",
+                      "rightMember": {
+                        "firstname": "GeorgeWashington",
+                        "rightMember": {
+                          "firstname": "AbrahamLincoln"
+                        },
+                        "leftMember": {
+                          "firstname": "ThomasJefferson"
+                        }
+                      },
+                      "leftMember": {
+                        "firstname": "WinstonChurchill",
+                        "rightMember": {
+                          "firstname": "FranklinDRoosevelt"
+                        },
+                        "leftMember": {
+                          "firstname": "TheodoreRoosevelt"
+                        }
+                      }
+                    }
+                  }
+                },
+                "leftMember": {
+                  "firstname": "MarieAntoinette"
+                }
+              },
+              "leftMember": {
+                "firstname": "Charlemagne",
+                "rightMember": {
+                  "firstname": "OttoVonBismarck"
+                },
+                "leftMember": {
+                  "firstname": "FrederickTheGreat"
+                }
+              }
+            },
+            "leftMember": {
+              "firstname": "Cleopatra",
+              "rightMember": {
+                "firstname": "JuliusCaesar",
+                "rightMember": {
+                  "firstname": "MarcusAurelius"
+                },
+                "leftMember": {
+                  "firstname": "AugustusCaesar"
+                }
+              },
+              "leftMember": {
+                "firstname": "RamsesTheGreat",
+                "rightMember": {
+                  "firstname": "Tutankhamun"
+                },
+                "leftMember": {
+                  "firstname": "Akhenaten"
+                }
+              }
+            }
+          }
+        },
+        "leftMember": {
+          "firstname": "NicholasTheSecond"
+        }
+      },
+      "leftMember": {
+        "firstname": "HenryTheEighth",
+        "rightMember": {
+          "firstname": "EdwardTheConfessor"
+        },
+        "leftMember": {
+          "firstname": "RichardTheLionheart"
+        }
+      }
+    },
+    "leftMember": {
+      "firstname": "ElizabethTheFirst",
+      "rightMember": {
+        "firstname": "GeorgeWashington",
+        "rightMember": {
+          "firstname": "AbrahamLincoln"
+        },
+        "leftMember": {
+          "firstname": "ThomasJefferson"
+        }
+      },
+      "leftMember": {
+        "firstname": "WinstonChurchill",
+        "rightMember": {
+          "firstname": "FranklinDRoosevelt"
+        },
+        "leftMember": {
+          "firstname": "TheodoreRoosevelt"
+        }
+      }
+    }
+  },
+  "leftMember": {
+    "firstname": "NapoleonBonaparte",
+    "rightMember": {
+      "firstname": "JoanOfArc",
+      "rightMember": {
+        "firstname": "LouisXIV",
+        "rightMember": {
+          "firstname": "CharlesDeGaulle"
+        },
+        "leftMember": {
+          "firstname": "MarieAntoinette"
+        }
+      },
+      "leftMember": {
+        "firstname": "Charlemagne",
+        "rightMember": {
+          "firstname": "OttoVonBismarck"
+        },
+        "leftMember": {
+          "firstname": "FrederickTheGreat"
+        }
+      }
+    },
+    "leftMember": {
+      "firstname": "Cleopatra",
+      "rightMember": {
+        "firstname": "JuliusCaesar",
+        "rightMember": {
+          "firstname": "MarcusAurelius"
+        },
+        "leftMember": {
+          "firstname": "AugustusCaesar"
+        }
+      },
+      "leftMember": {
+        "firstname": "RamsesTheGreat",
+        "rightMember": {
+          "firstname": "Tutankhamun"
+        },
+        "leftMember": {
+          "firstname": "Akhenaten"
+        }
+      }
+    }
+  }
+}

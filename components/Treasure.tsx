@@ -53,7 +53,7 @@ const Treasure: React.FC<TreasureProps> = ({ isMining, itemName }) => {
         {lottieFile && (
           <Lottie
             options={lottieOptions}
-            height="50vh" // Large size relative to viewport height
+            height="55vh" // Large size relative to viewport height
             width="1000vw"  // Large size relative to viewport width
             isPaused={!isMining}
             ref={lottieRef}
