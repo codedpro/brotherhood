@@ -83,7 +83,8 @@ export default function Home() {
 
       postData();
     }
-  }, [initData, user?.id]);
+    console.log(initData);
+  }, [initData]);
 
   return (
     <Layout>
@@ -91,6 +92,7 @@ export default function Home() {
         <div className="absolute top-8 text-center text-4xl font-serif">
           <h1 className="flex items-center justify-center">
             <FaCoins className="mr-2 text-lightGold" />
+            {user?.id}
             {formatScore(score)}
           </h1>
         </div>
