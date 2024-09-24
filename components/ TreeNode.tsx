@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 
-// Helper function to generate random names
 const getRandomName = () => {
   const names = [
     "Alexander",
@@ -28,7 +27,6 @@ type NodeData = {
   leftMember?: NodeData;
 };
 
-// Function to generate a random binary tree based on the number of layers
 const generateRandomTree = (layers: number): NodeData | null => {
   if (layers <= 0) return null;
 
@@ -49,8 +47,7 @@ const TreeComponent = () => {
   const [data, setData] = useState<NodeData | null>(null);
 
   useEffect(() => {
-    // Replace the hardcoded value with the number of layers you want to generate
-    const treeData = generateRandomTree(10); // Adjust the number of layers here
+    const treeData = generateRandomTree(3);
     setData(treeData);
   }, []);
 
@@ -220,7 +217,7 @@ const TreeComponent = () => {
 
   return (
     <div
-      className="tree-container"
+      className="tree-container "
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -232,10 +229,9 @@ const TreeComponent = () => {
     >
       <canvas
         ref={canvasRef}
-        width={1500}
-        height={1000}
+        width={500}
+        height={500}
         style={{
-          border: "1px solid black",
           cursor: isPanning ? "grabbing" : "grab",
         }}
       />

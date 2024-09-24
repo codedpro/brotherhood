@@ -53,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <TelegramProvider>
+        {/*       <TelegramProvider>
           {isTelegram && isReady ? (
             <Suspense fallback={<div>Loading Telegram...</div>}>
               {children}
@@ -65,9 +65,9 @@ export default function RootLayout({
                 : "This app is not running inside Telegram."}
             </div>
           )}
-        </TelegramProvider> 
+        </TelegramProvider> */}
 
-      {/*   {children} */}
+        {children}
       </body>
     </html>
   );

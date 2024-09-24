@@ -14,9 +14,8 @@ const Layout: React.FC<LayoutProps> = ({ children, title = "LabCoin" }) => {
         <title>{title}</title>
       </Head>
       <main>
-        <div className="h-screen bg-gradient-to-br from-dark via-midBlue to-darkBlue text-white flex flex-col items-center justify-between  overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-br from-dark via-midBlue to-darkBlue text-white flex flex-col items-center justify-between overflow-auto">
           {children}
-         
           <NavBar />
         </div>
       </main>
